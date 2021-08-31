@@ -1,6 +1,6 @@
 # README
 
-* **link a heroku:** https://mysterious-fjord-27619.herokuapp.com/
+* **link a heroku:** https://powerful-dusk-98721.herokuapp.com/
 
 
 * Ruby version
