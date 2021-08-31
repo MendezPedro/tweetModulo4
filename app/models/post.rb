@@ -16,9 +16,9 @@ class Post < ApplicationRecord
         Post.find(self.post_id).content
     end
 
-    scope :tweets_for_me, -> (user) { where('posts.user_id == ? OR (SELECT follower_id FROM follows WHERE follows.followed_id != ?)',user.id,user.id)}
+    #scope :tweets_for_me, -> (user) { where('posts.user_id == ? OR (SELECT follower_id FROM follows WHERE follows.followed_id != ?)',user.id,user.id)}
     #scope :posts_for_me, -> (user) { where(:user_id => user.id)}
     
-    #scope :posts_for_me, -> (user) { where(:user_id => user.followeds.ids)}.or(:posts_for_, -> (user) { where(:user_id => current_user)})
+    scope :tweets_for_me, -> (user) { where(:user_id => user.followeds.ids)}
     validates :content, presence: true
 end
