@@ -1,0 +1,28 @@
+<% if user_signed_in? %>
+    <h1>este es el home del usuario:  <%= current_user.name %> </h1>
+    <%= form_with(model: @post, local: true) do |f| %>
+    <% if @post.errors.any? %>
+        <div id = 'error_explanation'>
+            <h2>Este post no se pudo crear por las siguientes razones</h2>
+            <ul>
+                <% @post.errors.full_messages.each do |msg|%>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="form-group">
+        <%= f.label :content, 'Ingrese sus tweets' %>
+        <%= f.text_area :content, placeholder: 'ingresa el tweet', class:'form-control' %>
+    </div>
+    <div class="field text-center">
+        <%= submit_tag 'Crea tu tweet', class: 'px-3 mx-5 btn btn-primary text-center' %>
+    </div>
+<% end %>
+<% else %>
+    <h1>Inicie sesion para ser parte de la comunidad</h1>
+<% end %>
+
+<div class="container-fluid pt-1 mt-1">
+    <%= render "posts" %>
+</div>

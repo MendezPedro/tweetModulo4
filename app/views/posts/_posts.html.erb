@@ -1,0 +1,64 @@
+<div class="container">
+    <% if user_signed_in? %>
+        <div class="container">
+            <%= render 'users_to_follow' %>
+        </div>
+    <% end %>
+</div>
+<div class="row">
+    <% @posts.each do |p| %>
+        <div class="card-group col-md-4 px-3 mt-5 pt5 ">
+            <div class="card card-body back_ground_img">
+                <h5 class="card-title text-align"><%= p.user.name %></h5>
+                <div class="container ">
+                    <%= image_tag p.user.photo, class: "img-fluid rounded-circle" %>
+                </div>   
+                <div>
+                    <p class='card-text'><%= hash_tag(p.content) %></p>
+                    <span>
+                        <%= link_to repost_path(p.id), method: :post do %>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" />
+                            </svg>
+                        <% end %>
+                        <span><%= p.reposts.count %></span>
+                    </span>
+                    <span>
+                        <% if @user_likes.include? p.id %>
+                            <%= link_to dislike_path(p.id), method: :delete do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star-off" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <line x1="3" y1="3" x2="21" y2="21" />
+                                    <path d="M10.012 6.016l1.981 -4.014l3.086 6.253l6.9 1l-4.421 4.304m.012 4.01l.588 3.426l-6.158 -3.245l-6.172 3.245l1.179 -6.873l-5 -4.867l6.327 -.917" />
+                                </svg>
+                            <% end %>
+                        <% else %>
+                            <%= link_to like_path(p.id) do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                                </svg>
+                            <% end %>
+                        <% end %>  
+                    </span>
+                    <span><%= p.likes.count %></span>
+                    <p class="pull-right card-title"><%= link_to "#{time_ago_in_words(p.created_at)}", post_path(p.id) %> </p>
+                </div>
+                <div class="row rounded-circle retweet">
+                    <% if p.post_id != nil %>
+                        <p class="col-4 card-title text-align"><%= p.user_retweet %></p>
+                        <%= image_tag p.photo_retweet, class: "col-4 rounded-circle img-fluid" %>
+                        <p class="col-4 card-text text-align"><%= p.comment_retweet %></p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<div class="container card-title mt-5">
+    <%#= paginate @posts,param_name: :pagina %>
+    <%= link_to_previous_page @posts, 'Mostrar menos tweets', class: 'btn btn-dark' %>
+    <%= link_to_next_page @posts, 'Mostrar más tweets', class: 'btn btn-dark' %>
+
+</div>

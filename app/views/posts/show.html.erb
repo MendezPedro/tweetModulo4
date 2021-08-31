@@ -1,0 +1,15 @@
+<h1>Usuarios que dieron Like a esta publicacion</h1>
+<div class="row">
+    <% @post_likes.each do |pl| %>
+        <div class="card-group col-md-4 px-3 mt-5 pt5 ">
+            <div class="card card-body back_ground_img">
+                <h5 class="card-title text-align"><%= pl.user.name %></h5>
+                <div class="container ">
+                    <%= image_tag pl.user.photo, class: "img-fluid rounded-circle" %>
+                </div>   
+
+            </div>
+        </div>
+        
+    <% end %>
+</div>
