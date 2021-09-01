@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :banned?
     before_action :devise_params, if: :devise_controller?
-
+    skip_before_action :verify_authenticity_token
     protected 
 
     def banned?

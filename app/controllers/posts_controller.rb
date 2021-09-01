@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @user_likes = Like.where(user: current_user).pluck(:post_id)
     #@users = User.where('id IS NOT ?', current_user.id).last(6) if user_signed_in?
+    @users = User.where.not(id: current_user.id).last(6) if user_signed_in?
   end
 
   def create

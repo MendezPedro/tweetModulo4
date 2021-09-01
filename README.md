@@ -6,7 +6,6 @@
 * Ruby version
 2.5.3
 
-* **Autor:** Pedro Mendez
 #
 * **simulacion de tweets**
 * **####################**
