@@ -9,12 +9,10 @@ class User < ApplicationRecord
   has_many :followers, class_name: 'Follow', foreign_key: :followed_id, dependent: :destroy
 
 
-  def can_follow?(user)
-    #se extra a todos los seguidos
-    should_follow = self.followers.pluck(:follower_id)
-    # con :followed puedo solo ver a los que aun no sigo
-    !should_follow.include?(user.id)
+  def can_follow
+    User.where.not(id: followeds.map(&:followed_id)).limit(6)
     
   end
+  
   
 end
