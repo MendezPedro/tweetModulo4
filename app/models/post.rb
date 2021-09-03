@@ -21,6 +21,6 @@ class Post < ApplicationRecord
 
     #scope :tweets_for_me, -> (user) { where('posts.user_id == ?',user.id)}
 
-    scope :tweets_for_me, -> (user) { where(:user_id => user.followeds.ids)}
+    scope :tweets_for_me, -> (user) { where(:user_id => user.followeds.pluck(:followed_id))}
     validates :content, presence: true
 end

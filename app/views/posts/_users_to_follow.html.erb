@@ -1,6 +1,6 @@
 <div class="images-basic">
     <% @users.each do |user| %>
-        <% if user.can_follow? %>
+        <% if user.can_follow?(current_user) %>
             <%= link_to follow_path(user.id), method: :post do %>
                 <%= image_tag user.photo, class: 'img-for-user' %>
             <% end %>

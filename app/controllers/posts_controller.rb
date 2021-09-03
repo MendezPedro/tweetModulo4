@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     if params[:q].present?
       @posts = Post.where('content LIKE ?', "%#{params[:q]}%").order(created_at: :desc).page(params[:page])
     elsif user_signed_in?
-      @posts = Post.tweets_for_me(current_user).order(created_at: :desc).page(params[:page])
+      @posts = Post.tweets_for_me(current_user).or(Post.where(user_id: current_user.id)).order(created_at: :desc).page(params[:page])
       #@posts = Post.where(user_id: current_user).page(params[:page])
     else
       @posts = Post.order(created_at: :desc).page(params[:page])
