@@ -17,10 +17,9 @@ class Post < ApplicationRecord
     end
 
     #scope :tweets_for_me, -> (user) { where('posts.user_id == ? OR (SELECT follower_id FROM follows WHERE follows.followed_id != ?)',user.id,user.id)}
-    #scope :tweets_for_me, -> (user) { where(:user_id => user.id)}
-
-    #scope :tweets_for_me, -> (user) { where('posts.user_id == ?',user.id)}
-
     scope :tweets_for_me, -> (user) { where(:user_id => user.followeds.pluck(:followed_id))}
+
     validates :content, presence: true
+
+    serialize :field, JSON
 end

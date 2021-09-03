@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'news', to: 'posts#news'
+    end
+  end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'users/index'
@@ -9,7 +14,6 @@ Rails.application.routes.draw do
   post 'posts/repost/:id', to: 'posts#repost', as: 'repost'
   get 'likes/:id', to: 'likes#to_like', as: 'like'
   delete 'likes/:id', to: 'likes#to_dislike', as: 'dislike'
-  delete 'follows/:id', to: 'follows#to_disfollow', as: 'disfollow'
   post 'follows/:id', to: 'follows#to_follow', as: 'follow'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
