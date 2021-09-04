@@ -21,5 +21,4 @@ class Post < ApplicationRecord
 
     validates :content, presence: true
 
-    serialize :field, JSON
 end
