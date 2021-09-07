@@ -16,18 +16,19 @@ class Api::V1::PostsController < ApplicationController
     @tweets = @posts.where(:created_at => params[:fecha1]..params[:fecha2])
     render json: @tweets
   end
+  before_action :authenticate_user!
   def create
-    
-    @post = Post.new(content: params[:post][:content])
-    @post.user = current_user
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to root_path, notice: 'Nuevo tweet creado'}
-      else
-        @user_likes = Like.where(user: current_user).pluck(:post_id)
-        @posts = Post.all
-        format.html { redirect_to root_path, notice: 'debe escribir para publicar' }
-      end
-    end
+    @new_post = Post.create(content: params[:post][:content])
+    #@post = Post.new(content: params[:post][:content])
+    # @post.user = current_user
+    # respond_to do |format|
+    #   if @post.save
+    #     format.html { redirect_to root_path, notice: 'Nuevo tweet creado'}
+    #   else
+    #     @user_likes = Like.where(user: current_user).pluck(:post_id)
+    #     @posts = Post.all
+    #     format.html { redirect_to root_path, notice: 'debe escribir para publicar' }
+    #   end
+    # end
   end
 end

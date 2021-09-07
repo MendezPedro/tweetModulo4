@@ -6,8 +6,8 @@
 * Ruby version
 2.5.3
 
-#
-* **simulacion de tweets**
+# **simulacion de tweets**
+
 * **####################**
 * **Podemos crear usuarios**
 * **iniciar sesion**
@@ -15,7 +15,7 @@
 * **Retweetear**
 * **Dar Likes**
 
-#Gemas adicionales
+# Gemas adicionales
 * **gem 'bootstrap', '~> 4.6'**
 * **gem 'jquery-rails'**
 * **gem 'devise'**
@@ -23,13 +23,14 @@
 * **gem 'activeadmin'**
 * **gem 'kaminari'**
 
-#Super usuario
+# Super usuario
 * **Email:** admin@example.com
 * **Contraseña:** 123qwe
 
-# Hito 1 
+# Hito 3 
+* ver tweets formato json desde postman
 Ingrese al link http://localhost:3000/api/v1/news
-# Hito 2
+* ver tweets formato json con un rango de fecha especifica
 Ingrese al link http://localhost:3000/api/v1/2021-08-31/2022-09-05
-# Hito 3
+* crear tweets desde postman
 Ingrese al link http://localhost:3000/api/v1/posts/create
