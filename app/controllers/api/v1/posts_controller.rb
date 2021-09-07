@@ -1,5 +1,6 @@
 class Api::V1::PostsController < ApplicationController
   def news
+    #get #http://localhost:3000/api/v1/news
     @posts = Post.limit(50)
     @tweets = []
     @posts.each do |p|
@@ -10,10 +11,23 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def fecha_a_fecha
-    
+    #get #http://localhost:3000/api/v1/2021-08-31/2022-09-05
     @posts = Post.limit(50)
     @tweets = @posts.where(:created_at => params[:fecha1]..params[:fecha2])
     render json: @tweets
   end
-  
+  def create
+    
+    @post = Post.new(content: params[:post][:content])
+    @post.user = current_user
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to root_path, notice: 'Nuevo tweet creado'}
+      else
+        @user_likes = Like.where(user: current_user).pluck(:post_id)
+        @posts = Post.all
+        format.html { redirect_to root_path, notice: 'debe escribir para publicar' }
+      end
+    end
+  end
 end

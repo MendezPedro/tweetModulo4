@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       get 'news', to: 'posts#news'
     end
   end
+  namespace :api do
+    namespace :v1 do
+      post 'posts/create', to: 'posts#create'
+    end
+  end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'users/index'
