@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get ':fecha1/:fecha2', to: 'posts#fecha_a_fecha'
+    end
+  end
+  namespace :api do
+    namespace :v1 do
       get 'news', to: 'posts#news'
     end
   end

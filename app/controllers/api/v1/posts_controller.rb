@@ -8,5 +8,12 @@ class Api::V1::PostsController < ApplicationController
     end
     render json: @tweets
   end
+
+  def fecha_a_fecha
+    
+    @posts = Post.limit(50)
+    @tweets = @posts.where(:created_at => params[:fecha1]..params[:fecha2])
+    render json: @tweets
+  end
   
 end
